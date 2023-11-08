@@ -14,7 +14,6 @@ def fizz_buzz():
         else:
             print(num)
 
-
 # --------------------------Task 1
 def print_json_count_records():
     with open('bank_information.json') as file:
