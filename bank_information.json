@@ -1,0 +1,23 @@
+{
+  "clients_data": [
+    {
+      "users": [
+        {
+          "name": "Emma",
+          "age": 30,
+          "city": "New York"
+        },
+        {
+          "name": "Anna",
+          "age": 31,
+          "city": "New York"
+        },
+        {
+          "name": "Alisa",
+          "age": 30,
+          "city": "New York"
+        }
+      ]
+    }
+  ]
+}
