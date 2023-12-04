@@ -68,6 +68,10 @@ def are_palindromes(str1, str2):
 
     return char_count1 == char_count2
 
+def isPalindrome(first_string,second_string):
+    return first_string == second_string[::-1]
+    # return s == s[::-1]
+
 
 # --------------------------------------Task 6
 def find_combinations(coins, menu, current_combination, results):
@@ -138,6 +142,14 @@ def print_hi(name):
         second_string = str(input())
         result = are_palindromes(first_string, second_string)
         print(result)
+        # s = "malayalam"
+
+        print("Second variant: ")
+        print("Input first string: ")
+        new_first_string = str(input())
+        print("Input second string: ")
+        new_second_string = str(input())
+        print("Second variant result: ",isPalindrome(new_first_string,new_second_string))
     # ------------------------------------------------------------------
 
     # ---------------------Task 6-----------------------------------------
