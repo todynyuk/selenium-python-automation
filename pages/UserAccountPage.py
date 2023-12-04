@@ -14,3 +14,7 @@ class UserAccountPage(BasePage):
     def check_is_element_presented(self,element_path):
         return WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located(element_path)).is_enabled()
+
+    def click_home_page_button(self):
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(UserAccountPageLocators.UserAccountPageLocators.Header.HOME_BUTTON)).click()

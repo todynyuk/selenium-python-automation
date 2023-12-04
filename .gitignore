@@ -154,6 +154,11 @@ cython_debug/
 README.md
 .idea
 .DS_Store
+tests/resources
+pages/android_pages/
+pages/locators/android_locators/
+test_cases_mobile/
+tests/test_android_web_application.py
 
 
 

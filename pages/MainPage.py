@@ -20,6 +20,7 @@ class MainPage(BasePage):
             EC.presence_of_element_located(MainPageLocators.Main.Header.SIGN_IN_BUTTON)).click()
 
     def click_on_item_by_index(self, driver, index):
+        time.sleep(5)
         driver.find_element(By.CSS_SELECTOR,
                             f"div[class='col-md-9']>div[class='container']>:nth-child({index})>div[class='card-body']").click()
         time.sleep(5)

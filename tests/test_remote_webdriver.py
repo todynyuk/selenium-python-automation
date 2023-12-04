@@ -14,8 +14,6 @@ from selenium.webdriver.chrome import service
 from selenium.webdriver.common.utils import free_port
 import subprocess
 
-
-
 # def test_start_remote(server):
 #     pass
 #
@@ -84,6 +82,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
+
 # Define the remote WebDriver URL
 # REMOTE_URL = "http://localhost:4444/wd/hub"
 # NEW_REMOTE_URL =  "http://192.168.0.101:4444"
@@ -149,50 +148,71 @@ def test_search(remote_driver):
     search_box.send_keys("Drill")
     remote_driver.find_element(By.CSS_SELECTOR, "button[data-test='search-submit']").click()
     time.sleep(3)
-    search_title_text = remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>h3").text
+    search_title_text = remote_driver.find_element(By.CSS_SELECTOR, "div[class='col-md-9']>h3").text
     assert "Drill".lower() in search_title_text.lower()
     # driver.close()
     # driver.quit()
+
 
 def test_search_and_verify_non_empty_items_list(remote_driver):
     search_box = remote_driver.find_element(By.CSS_SELECTOR, "input[data-test='search-query']")
     search_box.send_keys("Drill")
     remote_driver.find_element(By.CSS_SELECTOR, "button[data-test='search-submit']").click()
     time.sleep(3)
-    items_title_list_size= len(remote_driver.find_elements(By.CSS_SELECTOR, "h5[data-test='product-name']"))
+    items_title_list_size = len(remote_driver.find_elements(By.CSS_SELECTOR, "h5[data-test='product-name']"))
     time.sleep(3)
     assert items_title_list_size > 0, "Search items list have zero size"
+
 
 def test_search_and_verify_item_title_texts(remote_driver):
     search_box = remote_driver.find_element(By.CSS_SELECTOR, "input[data-test='search-query']")
     search_box.send_keys("Drill")
     remote_driver.find_element(By.CSS_SELECTOR, "button[data-test='search-submit']").click()
     time.sleep(3)
-    first_item_title_text = remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-body']>h5[class='card-title']").text
+    first_item_title_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                       "div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-body']>h5[class='card-title']").text
     time.sleep(3)
     assert ("Drill").lower() in first_item_title_text.lower()
+
 
 def test_web_sort_by_asc(remote_driver):
     remote_driver.find_element(By.CSS_SELECTOR, "select[data-test='sort']").click()
     remote_driver.find_element(By.CSS_SELECTOR, "option[value='price,asc']").click()
-    first_item_price_text=remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-footer']>span>span[data-test='product-price']")
-    second_item_price_text=remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>div[class='container']>:nth-child(2)>div[class='card-footer']>span>span[data-test='product-price']")
-    first_buffer = str(first_item_price_text.text).replace("$","")
-    second_buffer = str(second_item_price_text.text).replace("$","")
-    assert first_buffer<second_buffer,"All items are not sorted from low to high price"
+    first_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                       "div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-footer']>span>span[data-test='product-price']")
+    second_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                        "div[class='col-md-9']>div[class='container']>:nth-child(2)>div[class='card-footer']>span>span[data-test='product-price']")
+    first_buffer = str(first_item_price_text.text).replace("$", "")
+    second_buffer = str(second_item_price_text.text).replace("$", "")
+    assert first_buffer < second_buffer, "All items are not sorted from low to high price"
+
 
 def test_web_sort_by_asc(remote_driver):
     remote_driver.find_element(By.CSS_SELECTOR, "select[data-test='sort']").click()
     remote_driver.find_element(By.CSS_SELECTOR, "option[value='price,desc']").click()
-    first_item_price_text=remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-footer']>span>span[data-test='product-price']")
-    second_item_price_text=remote_driver.find_element(By.CSS_SELECTOR,"div[class='col-md-9']>div[class='container']>:nth-child(2)>div[class='card-footer']>span>span[data-test='product-price']")
-    first_buffer = str(first_item_price_text.text).replace("$","")
-    second_buffer = str(second_item_price_text.text).replace("$","")
-    assert first_buffer>second_buffer,"All items are not sorted from high to low price"
-
-def test_shopping_basket(remote_driver):
-    remote_driver.find_element(By.CSS_SELECTOR, "select[data-test='sort1']").click()
-
+    first_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                       "div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-footer']>span>span[data-test='product-price']")
+    second_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                        "div[class='col-md-9']>div[class='container']>:nth-child(2)>div[class='card-footer']>span>span[data-test='product-price']")
+    first_buffer = str(first_item_price_text.text).replace("$", "")
+    second_buffer = str(second_item_price_text.text).replace("$", "")
+    assert first_buffer > second_buffer, "All items are not sorted from high to low price"
 
 
-
+def test_compare_shopping_basket_price(remote_driver):
+    # remote_driver.find_element(By.CSS_SELECTOR, "select[data-test='sort1']").click()
+    # time.sleep(3)
+    plp_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                     "div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-footer']>span>span[data-test='product-price']")
+    plp_buffer = str(plp_item_price_text.text).replace("$", "")
+    remote_driver.find_element(By.CSS_SELECTOR,
+                               "div[class='col-md-9']>div[class='container']>:nth-child(1)>div[class='card-body']>h5[class='card-title']").click()
+    time.sleep(3)
+    pdp_item_price_text = remote_driver.find_element(By.CSS_SELECTOR, "span[data-test='unit-price']")
+    pdp_buffer = str(pdp_item_price_text.text).replace("$", "")
+    remote_driver.find_element(By.CSS_SELECTOR, "a[data-test='nav-cart']").click()
+    basket_item_price_text = remote_driver.find_element(By.CSS_SELECTOR,
+                                                        "table[class='table table-hover']>tbody>tr>:nth-child(4)>span")
+    basket_buffer = str(basket_item_price_text.text).replace("$", "")
+    assert basket_buffer == plp_buffer, "Prices are not equals"
+    assert basket_buffer == pdp_buffer, "Prices are not equals"

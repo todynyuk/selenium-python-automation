@@ -19,10 +19,12 @@ class ProductDevicePage(BasePage):
             EC.presence_of_element_located(PDPLocators.ProductDevicePageLocators.Body.PRODUCT_TITLE_TEXT)).text
 
     def add_to_cart_button_click(self):
+        time.sleep(3)
         WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located(PDPLocators.ProductDevicePageLocators.Body.ADD_TO_CART_BUTTON)).click()
 
     def shopping_basket_click(self):
+        # time.sleep(5)
         # driver.find_element(By.CSS_SELECTOR,"button[data-test='add-to-cart']").click()
         # driver.find_element(PDPLocators.ProductDevicePageLocators.Body.ADD_TO_CART_BUTTON).click()
         WebDriverWait(self.driver, 10).until(

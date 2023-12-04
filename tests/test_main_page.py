@@ -37,9 +37,3 @@ class TestMainPage:
         main_page.click_on_checkbox_filter(driver, "Hammer")
         assert main_page.verify_is_search_think_present_in_goods_title(
             "Hammer"), "Items are not contains search text"
-
-    def test_example(self, driver):
-        main_page = MainPage(driver)
-        # assert "hvjhjh" in "0010000"
-        # main_page.get_main_text(driver)
-
